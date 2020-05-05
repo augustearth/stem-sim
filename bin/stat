@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# echo $0 > $2
+scriptdir=`dirname $0`
+
+#scriptdir/run stemsim.statxml.CancerStat $*
+#$scriptdir/run stemsim.statxml.MutationStat $*
+#$scriptdir/run stemsim.statxml.FitnessStat $*
+#$scriptdir/run stemsim.statxml.DistanceStat $*
+
+#$scriptdir/run stemsim.stat.CryptStat $*
+#$scriptdir/run stemsim.stat.DivStat $*
+$scriptdir/run stemsim.stat.TissuePopStat $*

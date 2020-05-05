@@ -1,0 +1,92 @@
+<project name="stemsim" default="unittest" basedir=".">
+
+    <!-- mechanical and installation properties -->
+    <property file="build.properties"/>
+
+    
+    <!-- Compile and install locally -->
+    <target name="install" depends="compile" description="install app">
+       <fail unless="install.dir">
+         please define the install.dir property in build.properties 
+       </fail>
+       
+       <copy file="${build}/${jarfile}.jar"
+             todir="${install.dir}"/>
+    </target>
+
+    
+    <!-- Default target.  Just compiles the code.  No installation -->
+    <target name="compile" description="compile the source code">
+        <mkdir dir="${build.classes}"/>
+    
+	    <javac srcdir="${source}"
+               destdir="${build.classes}"
+               sourcepath="${source.java}"
+               deprecation="on"
+               debug="on">
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                    <include name="**/*.zip"/>
+                </fileset>
+	    </classpath>
+        </javac>
+
+        <javac srcdir="${test.java}"
+               destdir="${build.classes}"
+               deprecation="on"
+               debug="on">
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                    <include name="**/*.zip"/>
+                </fileset>
+            </classpath>
+        </javac>
+        
+        <jar destfile="${build}/${jarfile}.jar"
+             basedir="${build.classes}"/>
+    </target>
+    
+    <!-- Run the unit tests  -->
+    <target name="unittest" description="run JUnit unit tests"
+        depends="compile">
+        <mkdir dir="${build.testresults}"/>
+        <mkdir dir="${build.tmp}"/>
+        <junit printsummary="yes" haltonfailure="yes">
+            <sysproperty key="testdata.dir" value="${test.data}"/>
+            <sysproperty key="tmp.dir" value="${build.tmp}"/>
+            <sysproperty key="testresults.dir" value="${build.testresults}"/>
+            <classpath>
+                <pathelement path="${java.class.path}" />
+                <fileset dir="${build}">
+                    <include name="**/*.jar"/>
+                    <include name="**/*.zip"/>
+                </fileset>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar"/>
+                    <include name="**/*.zip"/>
+                </fileset>
+            </classpath>
+            <formatter type="plain"/>
+            <test if="test.class" name="${test.class}" fork="no" 
+                  todir="${reports.tests}">
+            </test>
+            <batchtest unless="test.class"
+                       fork="no"
+                       todir="${build.testresults}">
+                <fileset dir="${test.java}">
+                    <include name="**/*Test*.java"/>
+                    <exclude name="**/*Tests.java"/>
+                    <exclude name="**/*TestCase.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- clean up a previous build for a fresh start -->
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+
+</project>

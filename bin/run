@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# echo $0 > $2
+scriptdir=`dirname $0`
+libdir=$scriptdir/../lib/
+builddir=$scriptdir/../build/
+cp=""
+for f in `find $builddir -name "*.jar"`;
+do
+  cp=${cp}$f:
+done
+
+for f in `find $libdir -name "*.jar"`;
+do
+  cp=${cp}$f:
+done
+
+# echo cp=$cp
+
+java -Xms256m -Xmx1536m -classpath $cp $*
+

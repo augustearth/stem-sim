@@ -1,0 +1,217 @@
+#
+# StemSim default parameters file.
+#
+
+###############################################################################
+# RUN SET PARAMETERS
+###############################################################################
+
+# number of simulations to run with these given parameters
+runset.runs=1
+
+# the parameter whose values to sweep across
+# leave blank for no parameter sweep
+# ex. to sweep stem cell apoptosis rate:
+#   runset.parametersweep.parameter=stemcell.apoptosisrate.base
+runset.parametersweep.parameter=
+
+# minimum value of the sweep parameter
+runset.parametersweep.min=
+
+# maximum value of the sweep parameter
+runset.parametersweep.max=
+
+# step for parameter sweep
+runset.parametersweep.step=
+
+
+###############################################################################
+# SIMULATION
+###############################################################################
+
+# which simulation to run
+# crypt|tissue
+simulation.type=tissue
+
+# maximum simulation duration in days
+simulation.duration=5000
+
+# maximum number of events to process
+# set to -1 for no maximum
+simulation.debug.maxevents=-1
+
+# echo debug text to stdout
+simulation.debug.echo=true
+
+# timing of debug echo
+# real - echo debug state every x seconds in real time
+# event - echo debug state every x days in simulation time
+simulation.debug.echo.time=real
+
+# time between debug echos
+simulation.debug.echo.step=5
+
+
+###############################################################################
+# TISSUE
+###############################################################################
+
+# number of rows in the tissue
+tissue.rows=5
+
+# number of columns in the tissue
+tissue.cols=5
+
+# connect vertical edges of the tissue
+tissue.wraparound=false
+
+
+###############################################################################
+# STEM CELL
+###############################################################################
+
+# base division rate
+stemcell.divisionrate.base=0.05
+
+# asymmetric div / symmetric div
+stemcell.asymmetricdivision.ratio=20
+
+# base apoptosis rate
+stemcell.apoptosisrate.base=0.04878
+
+# base mutation rate
+stemcell.mutationrate.base=0.0005
+
+# maximum allowed mutation rate
+stemcell.mutationrate.max=0.05
+
+# tsg mutation rate
+stemcell.tsgmutationrate.base=0.000005
+
+# maximum allowed mutation rate
+stemcell.tsgmutationrate.max=0.0005
+
+# number of tac cell associated with this stem cell
+stemcell.tacsize.base=2048
+
+
+###############################################################################
+# EVENT
+###############################################################################
+
+# cell division event floor time in days
+event.celldivision.floor=0.5
+
+# cell apoptosis event floor time in days
+event.apoptosis.floor=0.0
+
+
+###############################################################################
+# CRYPT
+###############################################################################
+
+# target equilibrium level of number of stem cells in a crypt
+crypt.numcells.mean=10
+
+# standard deviation from equilibrium level
+# the crypt uses this value to determine its level of effect on the
+# apoptosis and division rates of the stem cells
+crypt.numcells.standarddeviation=2
+
+# bifuctation threshold below which a crypt will not bifurcate
+crypt.bifurcation.threshold.ratio=2.0
+
+# crypt apoptosis effect multiplier
+crypt.apoptosis.multiplier=2.0
+
+# crypt division effect multiplier
+crypt.division.multiplier=2.0
+
+# apply this multiplier to the division effect for each dead neighbor crypt
+crypt.division.deadneighbor.multiplier=2.0
+
+
+###############################################################################
+# CANCER
+###############################################################################
+
+# uncontrolled cell proliferation threshold
+# if crypt has this threshold times the equilibrium number of stem cells, it is
+# considered to be experiencing uncontrolled stem cell proliferation
+cancer.uncontrolledgrowth.threshold=4.0
+
+# the number of TSG hits that means cancer
+cancer.tsg.threshold=2
+
+
+###############################################################################
+# STATISTICAL CALCULATORS
+###############################################################################
+
+# enable fixationstat
+fixationstat.enabled=true
+
+# enable cryptstat
+cryptstat.enabled=true
+
+# enable stempopstat
+stempopstat.enabled=true
+
+# take a sample every x days
+stempopstat.interval=100
+
+# enable divstat
+divstat.enabled=true
+
+# enable tissuepopstat
+tissuepopstat.enabled=true
+
+# tissuepopstat interval
+tissuepopstat.interval=100
+
+
+
+###############################################################################
+# MUTATION
+###############################################################################
+
+# the factor affecting the apoptosis rate of the stem cell
+beneficialmutation.apoptosis.multiplier=0.990099
+
+# the factor affecting the division rate of the stem cell
+beneficialmutation.division.multiplier=1.01
+
+# the factor affecting the apoptosis rate of the stem cell
+deleteriousmutation.apoptosis.multiplier=1.01
+
+# the factor affecting the division rate of the stem cell
+deleteriousmutation.division.multiplier=0.990099
+
+# the factor affecting the mutation rate of the stem cell
+mutatormutation.mutation.multiplier=100.0
+
+
+###############################################################################
+# MUTATION PROPORTIONS
+###############################################################################
+
+#
+# These parameters are swept across runs.  The total deleterious mutation
+# proportion starts at 0.50 and goes up to 0.85 in 0.05 increments.
+# 
+
+# proportion of deleterious apop mutations
+mutation.rate.deleterious.apop=0.25
+
+# proportion of deleterious div mutations
+mutation.rate.deleterious.div=0.25
+
+# proportion of beneficial-apoptosis mutations
+mutation.rate.beneficial.apop=0.20
+
+# proportion of beneficial-division mutations
+mutation.rate.beneficial.div=0.20
+
+# proportion of mutator mutations
+mutation.rate.mutator=0.10
+

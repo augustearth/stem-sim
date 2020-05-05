@@ -1,0 +1,64 @@
+package stemsim.statxml;
+
+import java.util.*;
+import java.util.regex.*;
+import java.io.*;
+import javax.xml.parsers.*;
+
+
+/**
+ * A util class providing a convenience method to recursivel get XML files.
+ *
+ */
+public class Util
+{
+    ////////////////////////////////////////////////////////////////////////////
+    // Class Level
+    ////////////////////////////////////////////////////////////////////////////
+    static public class DotXMLFilter implements FilenameFilter
+    {
+        public boolean accept(File $dir, String $name)
+        {
+            return $name.endsWith(".xml");
+        }
+    }
+    
+
+    static public class ExactMatchFilter implements FilenameFilter
+    {
+        String _name = null;
+        
+        public ExactMatchFilter(String $name)
+        {
+            _name = $name;
+        }
+        
+        public boolean accept(File $dir, String $name)
+        {
+            return $name.equals(_name);
+        }
+    }
+
+    
+    
+    static public void recursiveGetFiles(File $file, 
+                                         FilenameFilter $filter, 
+                                         List<File> $list)
+    {
+        if ($file.isFile())
+        {
+            if ($filter.accept($file.getParentFile(), $file.getName()))
+            {
+                $list.add($file);
+            }
+            return;
+        }
+        
+        File[] files = $file.listFiles();
+        for (File f : files)
+        {
+            recursiveGetFiles(f, $filter, $list);
+        }
+    }
+
+}

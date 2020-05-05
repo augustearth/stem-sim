@@ -1,0 +1,164 @@
+#
+# StemSim default parameters file.
+#
+
+# RUNSET PARAMETERS
+
+# number of simulations to run with these given parameters
+runset.runs=1
+
+# the parameter whose values to sweep across
+# leave blank for no parameter sweep
+# ex. to sweep stem cell apoptosis rate:
+#   runset.parametersweep.parameter=stemcell.apoptosisrate.base
+runset.parametersweep.parameter=
+
+# minimum value of the sweep parameter
+runset.parametersweep.min=10.0
+
+# maximum value of the sweep parameter
+runset.parametersweep.max=100.0
+
+# step for parameter sweep
+runset.parametersweep.step=-10.0
+
+
+# SIMULATION PARAMETERS
+
+# which simulation to run
+# crypt|tissue
+simulation.type=tissue
+
+# maximum simulation duration in days
+simulation.duration=29220
+
+# maximum number of events to process
+# set to -1 for no maximum
+simulation.debug.maxevents=-1
+
+# echo debug text to stdout
+simulation.debug.echo=true
+
+# timing of debug echo
+# real - echo debug state every x seconds in real time
+# event - echo debug state every x days in simulation time
+simulation.debug.echo.time=real
+
+# time between debug echos
+simulation.debug.echo.step=1
+
+
+# TISSUE PARAMETERS
+
+# number of rows in the tissue
+tissue.rows=5
+
+# number of columns in the tissue
+tissue.cols=5
+
+# connect vertical edges of the tissue
+tissue.wraparound=false
+
+
+# STEMCELL PAREMETERS
+
+# base division rate
+stemcell.divisionrate.base=0.05
+
+# base apoptosis rate
+stemcell.apoptosisrate.base=0.05
+
+# base mutation rate
+stemcell.mutationrate.base=0.0005
+
+# maximum allowed mutation rate
+# if a mutation rate computes above this value, treated as this value
+stemcell.mutationrate.max=0.05
+
+
+# EVENT PARAMETERS
+
+# cell division event floor time in days
+event.celldivision.floor=0.0416
+
+# cell apoptosis event floor time in days
+event.apoptosis.floor=0.0416
+
+
+# CRYPT PARAMETERS
+
+# target equilibrium level of number of stem cells in a crypt
+crypt.numcells.mean=10
+
+# standard deviation from equilibrium level
+# the crypt uses this value to determine its level of effect on the
+# apoptosis and division rates of the stem cells
+crypt.numcells.standarddeviation=2
+
+# bifuctation threshold below which a crypt will not bifurcate
+crypt.bifurcation.threshold.ratio=2.0
+
+# crypt apoptosis effect multiplier
+crypt.apoptosis.multiplier=2.0
+
+# if true, turn off apoptosis effect if there is a dead neighbor crypt
+crypt.apoptosis.deadneighbor.supression=true
+
+# crypt division effect multiplier
+crypt.division.multiplier=2.0
+
+# apply this multiplier to the division effect for each dead neighbor crypt
+crypt.division.deadneighbor.multiplier=1.0
+
+# cancer threshold
+# if crypt has this threshold times the equilibrium number of stem cells, it is
+# considered to have cancer
+crypt.cancer.threshold=4.0
+        
+
+# MUTATION PARAMETERS
+
+# proportion of deleterious apop mutations
+mutation.rate.deleterious.apop=0.25
+
+# proportion of deleterious div mutations
+mutation.rate.deleterious.div=0.25
+
+# proportion of beneficial-apoptosis mutations
+mutation.rate.beneficial.apop=0.20
+
+# proportion of beneficial-division mutations
+mutation.rate.beneficial.div=0.20
+
+# proportion of mutator mutations
+mutation.rate.mutator=0.10
+
+# the factor affecting the apoptosis rate of the stem cell
+beneficialmutation.apoptosis.multiplier=0.9
+
+# the factor affecting the division rate of the stem cell
+beneficialmutation.division.multiplier=1.1
+
+# the factor affecting the apoptosis rate of the stem cell
+deleteriousmutation.apoptosis.multiplier=1.1
+
+# the factor affecting the division rate of the stem cell
+deleteriousmutation.division.multiplier=0.9
+
+# the factor affecting the mutation rate of the stem cell
+mutatormutation.mutation.multiplier=100.0
+
+
+# STAT PARAMETERS
+
+# enable cryptstat
+cryptstat.enabled=false
+
+# output filename for cryptstat 
+cryptstat.filename=cryptstat
+
+# enable stempopstat
+stempopstat.enabled=true
+
+# take a sample every x days
+stempopstat.interval=1
