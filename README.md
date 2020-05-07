@@ -1,8 +1,8 @@
+[![DOI](https://zenodo.org/badge/261510710.svg)](https://zenodo.org/badge/latestdoi/261510710)
+
 # STEM-SIM
 
 Multi-scale simulation of neoplasm formation.
-
-[![DOI](https://zenodo.org/badge/261510710.svg)](https://zenodo.org/badge/latestdoi/261510710)
 
 ## Requirements
 
